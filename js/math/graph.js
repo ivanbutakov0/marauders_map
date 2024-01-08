@@ -4,12 +4,12 @@ class Graph {
 		this.links = links
 	}
 
-	removeLink(linkIndex) {
+	removeLink(link) {
 		if (this.links.length <= 0) {
 			console.log('no links to remove')
 			return
 		}
-		this.links.splice(linkIndex, 1)
+		this.links.splice(this.links.indexOf(link), 1)
 	}
 
 	addLink(link) {
@@ -38,18 +38,18 @@ class Graph {
 		return links
 	}
 
-	removeNode(nodeIndex) {
-		const links = this.getLinksWithNode(this.nodes[nodeIndex])
+	removeNode(node) {
+		const links = this.getLinksWithNode(node)
 
 		for (let link of links) {
-			this.removeLink(this.links.indexOf(link))
+			this.removeLink(link)
 		}
 
 		if (this.nodes.length <= 0) {
 			console.log('no nodes to remove')
 			return
 		}
-		this.nodes.splice(nodeIndex, 1)
+		this.nodes.splice(this.nodes.indexOf(node), 1)
 	}
 
 	addNode(node) {

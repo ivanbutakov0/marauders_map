@@ -12,6 +12,8 @@
 			<div id="controls"></div>
 		</canvas>
 
+		<script src="js/graphEditor.js"></script>
+		<script src="js/math/utils.js"></script>
 		<script src="js/math/graph.js"></script>
 		<script src="js/primitives/node.js"></script>
 		<script src="js/primitives/link.js"></script>
@@ -34,7 +36,16 @@
 				[node1, node2, node3, node4],
 				[link1, link2, link3]
 			)
-			graph.draw(ctx)
+
+			const graphEditor = new GraphEditor(myCanvas, graph)
+
+			animate()
+
+			function animate() {
+				ctx.clearRect(0, 0, myCanvas.width, myCanvas.height)
+				graphEditor.display()
+				requestAnimationFrame(animate)
+			}
 		</script>
 	</body>
 </html>
