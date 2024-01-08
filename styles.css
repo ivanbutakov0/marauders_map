@@ -1,0 +1,12 @@
+body {
+	text-align: center;
+	background-color: black;
+}
+
+h1 {
+	color: white;
+}
+
+#myCanvas {
+	background-color: #5dba00;
+}
