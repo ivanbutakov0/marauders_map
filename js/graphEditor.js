@@ -14,7 +14,7 @@ class GraphEditor {
 	}
 
 	#addEventListener() {
-		// disable right click menu
+		//  disable right click menu
 		this.canvas.addEventListener('contextmenu', e => {
 			e.preventDefault()
 		})
