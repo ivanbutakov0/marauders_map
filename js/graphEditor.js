@@ -19,43 +19,47 @@ class GraphEditor {
 			e.preventDefault()
 		})
 
-		this.canvas.addEventListener('mousedown', e => {
-			// check if right click
-			if (e.button === 2) {
-				if (this.selected) {
-					this.selected = null
-				} else if (this.hovered) {
-					this.#removeNode(this.hovered)
-				}
-				return
-			}
+		this.canvas.addEventListener('mousedown', this.#handleMouseDown.bind(this))
 
-			// check if left click
-			if (e.button === 0) {
-				if (this.hovered) {
-					this.#select(this.hovered)
-					this.dragging = true
-					return
-				}
-
-				this.graph.tryAddNode(this.node)
-				this.#select(this.node)
-				this.hovered = this.node
-			}
-		})
-
-		this.canvas.addEventListener('mousemove', e => {
-			this.node = new Node(e.offsetX, e.offsetY)
-			this.hovered = getNearestNode(this.node, this.graph.nodes)
-			if (this.dragging === true) {
-				this.selected.x = this.node.x
-				this.selected.y = this.node.y
-			}
-		})
+		this.canvas.addEventListener('mousemove', this.#handleMouseMove.bind(this))
 
 		this.canvas.addEventListener('mouseup', () => {
 			this.dragging = false
 		})
+	}
+
+	#handleMouseDown(e) {
+		// check if right click
+		if (e.button === 2) {
+			if (this.selected) {
+				this.selected = null
+			} else if (this.hovered) {
+				this.#removeNode(this.hovered)
+			}
+			return
+		}
+
+		// check if left click
+		if (e.button === 0) {
+			if (this.hovered) {
+				this.#select(this.hovered)
+				this.dragging = true
+				return
+			}
+
+			this.graph.tryAddNode(this.node)
+			this.#select(this.node)
+			this.hovered = this.node
+		}
+	}
+
+	#handleMouseMove(e) {
+		this.node = new Node(e.offsetX, e.offsetY)
+		this.hovered = getNearestNode(this.node, this.graph.nodes)
+		if (this.dragging === true) {
+			this.selected.x = this.node.x
+			this.selected.y = this.node.y
+		}
 	}
 
 	#select(node) {
