@@ -7,6 +7,7 @@ class GraphEditor {
 
 		this.selected = null
 		this.hovered = null
+		this.dragging = false
 
 		this.#addEventListener()
 	}
@@ -35,6 +36,7 @@ class GraphEditor {
 				const node = new Node(e.offsetX, e.offsetY)
 				if (this.hovered) {
 					this.selected = this.hovered
+					this.dragging = true
 					return
 				}
 				this.graph.tryAddNode(node)
@@ -46,6 +48,14 @@ class GraphEditor {
 		this.canvas.addEventListener('mousemove', e => {
 			const node = new Node(e.offsetX, e.offsetY)
 			this.hovered = getNearestNode(node, this.graph.nodes)
+			if (this.dragging === true) {
+				this.selected.x = node.x
+				this.selected.y = node.y
+			}
+		})
+
+		this.canvas.addEventListener('mouseup', () => {
+			this.dragging = false
 		})
 	}
 
