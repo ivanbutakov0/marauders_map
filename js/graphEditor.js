@@ -8,6 +8,7 @@ class GraphEditor {
 		this.selected = null
 		this.hovered = null
 		this.dragging = false
+		this.node = null
 
 		this.#addEventListener()
 	}
@@ -31,26 +32,24 @@ class GraphEditor {
 
 			// check if left click
 			if (e.button === 0) {
-				const node = new Node(e.offsetX, e.offsetY)
-
 				if (this.hovered) {
 					this.#select(this.hovered)
 					this.dragging = true
 					return
 				}
 
-				this.graph.tryAddNode(node)
-				this.#select(node)
-				this.hovered = node
+				this.graph.tryAddNode(this.node)
+				this.#select(this.node)
+				this.hovered = this.node
 			}
 		})
 
 		this.canvas.addEventListener('mousemove', e => {
-			const node = new Node(e.offsetX, e.offsetY)
-			this.hovered = getNearestNode(node, this.graph.nodes)
+			this.node = new Node(e.offsetX, e.offsetY)
+			this.hovered = getNearestNode(this.node, this.graph.nodes)
 			if (this.dragging === true) {
-				this.selected.x = node.x
-				this.selected.y = node.y
+				this.selected.x = this.node.x
+				this.selected.y = this.node.y
 			}
 		})
 
@@ -81,6 +80,8 @@ class GraphEditor {
 			this.hovered.draw(this.ctx, { fill: true })
 		}
 		if (this.selected) {
+			const aimNode = this.hovered || this.node
+			new Link(this.selected, aimNode).draw(this.ctx, { dash: [3, 3] })
 			this.selected.draw(this.ctx, { outline: true })
 		}
 	}

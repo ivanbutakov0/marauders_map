@@ -12,12 +12,14 @@ class Link {
 		return this.from.equals(node) || this.to.equals(node)
 	}
 
-	draw(ctx, width = 2, color = 'black') {
+	draw(ctx, { width = 2, color = 'black', dash = [] } = {}) {
 		ctx.beginPath()
+		ctx.setLineDash(dash)
 		ctx.lineWidth = width
 		ctx.strokeStyle = color
 		ctx.moveTo(this.from.x, this.from.y)
 		ctx.lineTo(this.to.x, this.to.y)
 		ctx.stroke()
+		ctx.setLineDash([])
 	}
 }
