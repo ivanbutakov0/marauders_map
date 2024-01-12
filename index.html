@@ -13,6 +13,7 @@
 		</canvas>
 
 		<script src="js/graphEditor.js"></script>
+		<script src="js/viewport.js"></script>
 		<script src="js/math/utils.js"></script>
 		<script src="js/math/graph.js"></script>
 		<script src="js/primitives/node.js"></script>
@@ -36,6 +37,8 @@
 				[node1, node2, node3, node4],
 				[link1, link2, link3]
 			)
+
+			const viewport = new Viewport(myCanvas)
 
 			const graphEditor = new GraphEditor(myCanvas, graph)
 
