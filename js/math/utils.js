@@ -1,5 +1,5 @@
-function getNearestNode(location, nodes) {
-	let minDist = 16
+function getNearestNode(location, nodes, radius = 16) {
+	let minDist = radius
 	let nearest = null
 	for (let node of nodes) {
 		const dist = distance(location, node)
