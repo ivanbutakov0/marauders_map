@@ -4,6 +4,19 @@ class Graph {
 		this.links = links
 	}
 
+	static load(info) {
+		const nodes = info.nodes.map(node => new Node(node.x, node.y))
+		const links = info.links.map(
+			link =>
+				new Link(
+					nodes.find(node => node.equals(link.from)),
+					nodes.find(node => node.equals(link.to))
+				)
+		)
+
+		return new Graph(nodes, links)
+	}
+
 	removeLink(link) {
 		if (this.links.length <= 0) {
 			console.log('no links to remove')
