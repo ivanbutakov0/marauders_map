@@ -55,7 +55,7 @@ class GraphEditor {
 	}
 
 	#handleMouseMove(e) {
-		this.node = this.viewport.getMouse(e)
+		this.node = this.viewport.getMouse(e, true)
 		this.hovered = getNearestNode(
 			this.node,
 			this.graph.nodes,
