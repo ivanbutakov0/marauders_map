@@ -20,6 +20,8 @@
 		<script src="js/math/graph.js"></script>
 		<script src="js/primitives/node.js"></script>
 		<script src="js/primitives/link.js"></script>
+		<script src="js/primitives/polygon.js"></script>
+		<script src="js/primitives/envelope.js"></script>
 		<script>
 			myCanvas.width = 700
 			myCanvas.height = 500
@@ -37,6 +39,10 @@
 			function animate() {
 				viewport.reset()
 				graphEditor.display()
+				for (let link of graph.links) {
+					new Envelope(link, 80).draw(ctx)
+				}
+
 				requestAnimationFrame(animate)
 			}
 

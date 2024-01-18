@@ -26,3 +26,14 @@ function add(node1, node2) {
 function scale(node, scaler) {
 	return new Node(node.x * scaler, node.y * scaler)
 }
+
+function translate(loc, angle, offset) {
+	return new Node(
+		loc.x + Math.cos(angle) * offset,
+		loc.y + Math.sin(angle) * offset
+	)
+}
+
+function angle(node) {
+	return Math.atan2(node.y, node.x)
+}
